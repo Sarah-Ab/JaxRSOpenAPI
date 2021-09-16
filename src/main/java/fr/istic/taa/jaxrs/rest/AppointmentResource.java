@@ -10,6 +10,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import fr.istic.taa.jaxrs.dao.AppointmentDao;
+import fr.istic.taa.jaxrs.dao.UserDao;
+import fr.istic.taa.jaxrs.dao.WorkerDao;
 import fr.istic.taa.jaxrs.domain.Appointment;
 import fr.istic.taa.jaxrs.domain.User;
 import fr.istic.taa.jaxrs.domain.Worker;
@@ -29,13 +31,16 @@ public class AppointmentResource {
 
 	@POST
 	@Consumes("application/json")
-	public Response addAppointment(@Parameter(name = "user", required = true) User user,
-								   @Parameter(name = "worker", required = true) Worker worker,
-								   @Parameter(name = "password", required = true) String password,
+	public Response addAppointment(@Parameter(name="date", required = true)Date date,
 								   @Parameter(name="duration",required = true)int duration,
-								   @Parameter(name="description", required = true) String description,
-								   @Parameter(name="date", required = true)Date date) {
+								   @Parameter(name = "userId", required = true) long userId,
+								   @Parameter(name = "workerId", required = true) long workerId,
+								   @Parameter(name="description", required = true) String description) {
 		AppointmentDao dao = new AppointmentDao();
+		UserDao userdao = new UserDao();
+		User user = userdao.findOne(userId);
+		WorkerDao workerdao = new WorkerDao();
+		Worker worker = workerdao.findOne(workerId);
 		dao.create(date,duration,user,worker,description);
 		return Response.ok().entity("SUCCESS").build();
 	}
