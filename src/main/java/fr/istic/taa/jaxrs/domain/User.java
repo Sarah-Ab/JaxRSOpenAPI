@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -17,7 +18,7 @@ public class User implements Serializable {
 
 	private static final long serialVersionUID = -7523683009774086865L;
 
-	private long id;
+	private Long id;
 	private String name;
 	private String email;
 	private String password;
@@ -26,11 +27,11 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue
 	@XmlElement(name = "id")
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -63,6 +64,7 @@ public class User implements Serializable {
 
 	@XmlElementWrapper(name = "appointments")
 	@XmlElement(name = "appointment")
+	@OneToMany(mappedBy = "date")
 	public List<Appointment> getAppointments() {
 		return appointments;
 	}

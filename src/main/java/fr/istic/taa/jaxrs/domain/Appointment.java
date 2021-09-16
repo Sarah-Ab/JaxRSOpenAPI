@@ -6,6 +6,7 @@ import java.sql.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 @Entity
@@ -24,11 +25,11 @@ public class Appointment implements Serializable {
 	@Id
 	@GeneratedValue
 	@XmlElement(name = "id")
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -51,6 +52,7 @@ public class Appointment implements Serializable {
 	}
 
 	@XmlElement(name = "user")
+	@ManyToOne
 	public User getUser() {
 		return user;
 	}
@@ -60,6 +62,7 @@ public class Appointment implements Serializable {
 	}
 
 	@XmlElement(name = "worker")
+	@ManyToOne
 	public Worker getWorker() {
 		return worker;
 	}

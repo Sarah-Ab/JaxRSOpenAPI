@@ -12,17 +12,17 @@ public class Worker extends User {
 
 	private static final long serialVersionUID = -6110089337926718725L;
 
-	private long id;
+	private Long id;
 	private String job;
 
 	@Id
 	@GeneratedValue
 	@XmlElement(name = "id")
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
