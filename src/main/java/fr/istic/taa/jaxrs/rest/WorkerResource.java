@@ -28,6 +28,7 @@ public class WorkerResource {
 	}
 
 	@POST
+	@Path("/add")
 	@Consumes("application/json")
 	public Response addWorker(@Parameter(name = "name", required = true) String name,
 			@Parameter(name = "email", required = true) String email,

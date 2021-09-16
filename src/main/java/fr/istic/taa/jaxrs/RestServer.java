@@ -17,9 +17,11 @@ public class RestServer {
 
         UndertowJaxrsServer ut = new UndertowJaxrsServer();
 
-        TestApplication ta = new TestApplication();
+        //TestApplication ta = new TestApplication();
+        RestApplication ra = new RestApplication();
 
-        ut.deploy(ta);
+        //ut.deploy(ta);
+        ut.deploy(ra);
 
         ut.start(
                 Undertow.builder()

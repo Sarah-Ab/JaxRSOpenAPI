@@ -1,6 +1,7 @@
 package fr.istic.taa.jaxrs.rest;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -19,6 +20,19 @@ import io.swagger.v3.oas.annotations.Parameter;
 public class UserResource {
 
 	@GET
+	@Path("/showall")
+	public List<User> getUsers() {
+		System.out.println("coucou");
+		// return user
+		UserDao dao = new UserDao();
+		List<User> users = dao.findAll();
+		for (User user : users) {
+			System.out.println(user.toString());
+		}
+		return users;
+	}
+	
+	@GET
 	@Path("/{userId}")
 	public User getUserById(@PathParam("userId") Long userId) {
 		// return user
@@ -28,13 +42,12 @@ public class UserResource {
 	}
 
 	@POST
+	@Path("/add/{name}")
 	@Consumes("application/json")
-	public Response addUser(@Parameter(name = "name", required = true) String name,
-			@Parameter(name = "email", required = true) String email,
-			@Parameter(name = "password", required = true) String password) {
+	public Response addUser(@Parameter(name = "name", required = true) String name) {
 		// add user
 		UserDao dao = new UserDao();
-		dao.create(name, email, password, new ArrayList<>());
+		dao.create(name, "email", "password", new ArrayList<>());
 		return Response.ok().entity("SUCCESS").build();
 	}
 }

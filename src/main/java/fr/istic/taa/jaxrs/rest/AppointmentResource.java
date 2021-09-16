@@ -30,6 +30,7 @@ public class AppointmentResource {
 	}
 
 	@POST
+	@Path("/add")
 	@Consumes("application/json")
 	public Response addAppointment(@Parameter(name="date", required = true)Date date,
 								   @Parameter(name="duration",required = true)int duration,
