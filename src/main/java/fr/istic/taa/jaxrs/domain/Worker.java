@@ -6,6 +6,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "Worker")
 public class Worker extends User {
 
+	private static final long serialVersionUID = -6110089337926718725L;
+
 	private long id;
 	private String job;
 

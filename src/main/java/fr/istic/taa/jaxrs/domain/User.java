@@ -1,5 +1,6 @@
 package fr.istic.taa.jaxrs.domain;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,9 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "User")
-public class User {
+public class User implements Serializable {
+
+	private static final long serialVersionUID = -7523683009774086865L;
 
 	private long id;
 	private String name;

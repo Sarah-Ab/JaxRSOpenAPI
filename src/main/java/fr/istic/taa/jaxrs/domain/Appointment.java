@@ -1,13 +1,16 @@
 package fr.istic.taa.jaxrs.domain;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "Appointement")
-public class Appointment {
+public class Appointment implements Serializable {
 
+	private static final long serialVersionUID = 3189767790431774089L;
+	
 	private Long id;
 	private Date date;
 	private int duration;
