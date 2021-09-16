@@ -1,5 +1,7 @@
 package fr.istic.taa.jaxrs.rest;
 
+import java.util.ArrayList;
+
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -8,6 +10,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
+import fr.istic.taa.jaxrs.dao.WorkerDao;
 import fr.istic.taa.jaxrs.domain.Worker;
 import io.swagger.v3.oas.annotations.Parameter;
 
@@ -19,14 +22,20 @@ public class WorkerResource {
 	@Path("/{workerId}")
 	public Worker getWorkerById(@PathParam("workerId") Long workerId) {
 		// return worker
-		return new Worker();
+		WorkerDao dao = new WorkerDao();
+		Worker worker = dao.findOne(workerId);
+		return worker;
 	}
 
 	@POST
 	@Consumes("application/json")
-	public Response addWorker(
-			@Parameter(description = "Worker object that needs to be added to the store", required = true) Worker worker) {
+	public Response addWorker(@Parameter(name = "name", required = true) String name,
+			@Parameter(name = "email", required = true) String email,
+			@Parameter(name = "password", required = true) String password,
+			@Parameter(name = "job", required = true) String job) {
 		// add worker
+		WorkerDao dao = new WorkerDao();
+		dao.create(name, email, password, job, new ArrayList<>());
 		return Response.ok().entity("SUCCESS").build();
 	}
 }

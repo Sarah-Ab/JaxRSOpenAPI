@@ -4,10 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+@Entity
 @XmlRootElement(name = "User")
 public class User implements Serializable {
 
@@ -19,6 +23,8 @@ public class User implements Serializable {
 	private String password;
 	private List<Appointment> appointments = new ArrayList<Appointment>();
 
+	@Id
+	@GeneratedValue
 	@XmlElement(name = "id")
 	public long getId() {
 		return id;

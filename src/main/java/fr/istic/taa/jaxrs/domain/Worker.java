@@ -1,8 +1,12 @@
 package fr.istic.taa.jaxrs.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+@Entity
 @XmlRootElement(name = "Worker")
 public class Worker extends User {
 
@@ -11,6 +15,8 @@ public class Worker extends User {
 	private long id;
 	private String job;
 
+	@Id
+	@GeneratedValue
 	@XmlElement(name = "id")
 	public long getId() {
 		return id;

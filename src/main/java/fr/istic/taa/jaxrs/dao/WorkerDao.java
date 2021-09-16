@@ -8,14 +8,13 @@ import fr.istic.taa.jaxrs.domain.Worker;
 
 public class WorkerDao extends AbstractJpaDao<Long, Worker> {
 
-	public void create(long id, String name, String email, String password, List<Appointment> appointments, String job) {
+	public void create(String name, String email, String password, String job, List<Appointment> appointments) {
 		Worker worker = new Worker();
-		worker.setId(id);
 		worker.setName(name);
 		worker.setEmail(email);
 		worker.setPassword(password);
-		worker.setAppointments(appointments);
 		worker.setJob(job);
+		worker.setAppointments(appointments);
 		save(worker);
 	}
 

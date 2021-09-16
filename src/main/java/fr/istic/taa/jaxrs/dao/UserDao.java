@@ -7,14 +7,13 @@ import fr.istic.taa.jaxrs.domain.Appointment;
 import fr.istic.taa.jaxrs.domain.User;
 
 public class UserDao extends AbstractJpaDao<Long, User> {
-	
-	public void create(String name, List<Appointment> appointments, String email, long id, String password) {
+
+	public void create(String name, String email, String password, List<Appointment> appointments) {
 		User user = new User();
 		user.setName(name);
-		user.setAppointments(appointments);
 		user.setEmail(email);
-		user.setId(id);
 		user.setPassword(password);
+		user.setAppointments(appointments);
 		save(user);
 	}
 }
