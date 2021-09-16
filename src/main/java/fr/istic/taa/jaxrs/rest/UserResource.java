@@ -22,6 +22,8 @@ public class UserResource {
 	public List<User> getUsers() {
 		// return users
 		UserDao dao = new UserDao();
+		dao.setClazz(User.class);
+		System.out.print("---------------------------"+User.class+"----------------------------");
 		List<User> users = dao.findAll();
 		System.out.println("Users:");
 		for (User user : users) {
