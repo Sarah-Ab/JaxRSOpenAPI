@@ -9,12 +9,12 @@ import java.util.Collections;
 import java.util.List;
 
 public class UserDao extends AbstractJpaDao <Long, Appointment> {
-    public void create(String name, List <Appointment> appointements , String email, long id,String pwd){
+    public void create(String name, List <Appointment> appointments , String email, long id,String password){
         User user=new User();
         user.setName(name);
-        user.setAppointments(appointements);
+        user.setAppointments(appointments);
         user.setEmail(email);
         user.setId(id);
-        user.setPassword(pwd);
+        user.setPassword(password);
     }
 }
