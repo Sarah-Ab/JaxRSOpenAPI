@@ -9,9 +9,8 @@ import fr.istic.taa.jaxrs.domain.Worker;
 
 public class AppointmentDao extends AbstractJpaDao<Long, Appointment> {
 
-	public void create(Long id, Date date, int duration, User user, Worker worker, String description) {
+	public void create(Date date, int duration, User user, Worker worker, String description) {
 		Appointment appointement = new Appointment();
-		appointement.setId(id);
 		appointement.setDate(date);
 		appointement.setDuration(duration);
 		appointement.setUser(user);

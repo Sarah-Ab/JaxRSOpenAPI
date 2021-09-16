@@ -3,9 +3,12 @@ package fr.istic.taa.jaxrs.domain;
 import java.io.Serializable;
 import java.sql.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
+@Entity
 @XmlRootElement(name = "Appointement")
 public class Appointment implements Serializable {
 
@@ -18,6 +21,8 @@ public class Appointment implements Serializable {
 	private Worker worker;
 	private String description;
 
+	@Id
+	@GeneratedValue
 	@XmlElement(name = "id")
 	public long getId() {
 		return id;
