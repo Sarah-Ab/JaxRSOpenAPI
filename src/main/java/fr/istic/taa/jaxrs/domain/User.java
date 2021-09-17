@@ -64,7 +64,7 @@ public class User implements Serializable {
 
 	@XmlElementWrapper(name = "appointments")
 	@XmlElement(name = "appointment")
-	@OneToMany(mappedBy = "date")
+	@OneToMany(mappedBy = "user")
 	public List<Appointment> getAppointments() {
 		return appointments;
 	}
