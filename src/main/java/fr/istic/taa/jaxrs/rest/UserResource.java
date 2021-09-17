@@ -1,6 +1,5 @@
 package fr.istic.taa.jaxrs.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -17,18 +16,13 @@ import fr.istic.taa.jaxrs.domain.User;
 @Produces({ "application/json", "application/xml" })
 public class UserResource {
 
+	public final static UserDao DAO = new UserDao();
+	
 	@GET
-	@Path("/showall")
+	@Path("/all")
 	public List<User> getUsers() {
 		// return users
-		UserDao dao = new UserDao();
-		dao.setClazz(User.class);
-		System.out.print("---------------------------"+User.class+"----------------------------");
-		List<User> users = dao.findAll();
-		System.out.println("Users:");
-		for (User user : users) {
-			System.out.println(user);
-		}
+		List<User> users = DAO.findAll();
 		return users;
 	}
 
@@ -36,8 +30,7 @@ public class UserResource {
 	@Path("/{userId}")
 	public User getUserById(@PathParam("userId") Long userId) {
 		// return user
-		UserDao dao = new UserDao();
-		User user = dao.findOne(userId);
+		User user = DAO.findOne(userId);
 		return user;
 	}
 
@@ -46,8 +39,7 @@ public class UserResource {
 	public Response addUser(@PathParam("name") String name, @PathParam("email") String email,
 			@PathParam("password") String password) {
 		// add user
-		UserDao dao = new UserDao();
-		dao.create(name, email, password, new ArrayList<>());
+		DAO.create(name, email, password);
 		return Response.ok().entity("SUCCESS").build();
 	}
 }

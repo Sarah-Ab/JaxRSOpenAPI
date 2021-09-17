@@ -1,7 +1,8 @@
 package fr.istic.taa.jaxrs.rest;
 
 import java.sql.Date;
-import javax.ws.rs.Consumes;
+import java.util.List;
+
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -10,39 +11,41 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 
 import fr.istic.taa.jaxrs.dao.AppointmentDao;
-import fr.istic.taa.jaxrs.dao.UserDao;
-import fr.istic.taa.jaxrs.dao.WorkerDao;
 import fr.istic.taa.jaxrs.domain.Appointment;
 import fr.istic.taa.jaxrs.domain.User;
 import fr.istic.taa.jaxrs.domain.Worker;
-import io.swagger.v3.oas.annotations.Parameter;
 
 @Path("/appointment")
 @Produces({ "application/json", "application/xml" })
 public class AppointmentResource {
 
+	public final static AppointmentDao DAO = new AppointmentDao();
+
+	@GET
+	@Path("/all")
+	public List<Appointment> getAppointments() {
+		// return appointments
+		List<Appointment> appointments = DAO.findAll();
+		return appointments;
+	}
+
 	@GET
 	@Path("/{appointmentId}")
 	public Appointment getAppointmentById(@PathParam("appointmentId") Long appointmentId) {
-		AppointmentDao dao = new AppointmentDao();
-		Appointment ap = dao.findOne(appointmentId);
-		return ap;
+		// return appointment
+		Appointment appointment = DAO.findOne(appointmentId);
+		return appointment;
 	}
 
 	@POST
-	@Path("/add")
-	@Consumes("application/json")
-	public Response addAppointment(@Parameter(name="date", required = true)Date date,
-								   @Parameter(name="duration",required = true)int duration,
-								   @Parameter(name = "userId", required = true) long userId,
-								   @Parameter(name = "workerId", required = true) long workerId,
-								   @Parameter(name="description", required = true) String description) {
-		AppointmentDao dao = new AppointmentDao();
-		UserDao userdao = new UserDao();
-		User user = userdao.findOne(userId);
-		WorkerDao workerdao = new WorkerDao();
-		Worker worker = workerdao.findOne(workerId);
-		dao.create(date,duration,user,worker,description);
+	@Path("/add/{date}&{duration}&{userId}&{workerId}&{description}")
+	public Response addAppointment(@PathParam("date") Date date, @PathParam("duration") int duration,
+			@PathParam("userId") Long userId, @PathParam("workerId") Long workerId,
+			@PathParam("description") String description) {
+		// add appointment
+		User user = UserResource.DAO.findOne(userId);
+		Worker worker = WorkerResource.DAO.findOne(workerId);
+		DAO.create(date, duration, user, worker, description);
 		return Response.ok().entity("SUCCESS").build();
 	}
 }

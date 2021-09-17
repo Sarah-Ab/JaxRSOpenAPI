@@ -19,10 +19,10 @@ public class User implements Serializable {
 	private static final long serialVersionUID = -7523683009774086865L;
 
 	private Long id;
-	private String name;
-	private String email;
-	private String password;
-	private List<Appointment> appointments = new ArrayList<Appointment>();
+	protected String name;
+	protected String email;
+	protected String password;
+	protected List<Appointment> appointments = new ArrayList<Appointment>();
 
 	@Id
 	@GeneratedValue
@@ -75,8 +75,13 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", appointment="
-				+ appointments + "]";
+		String str = "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password
+				+ ", appointments={";
+		for (Appointment appointment : appointments) {
+			str += appointment.getId() + ",";
+		}
+		str += "}]";
+		return str;
 	}
 
 }

@@ -37,7 +37,12 @@ public class Worker extends User {
 
 	@Override
 	public String toString() {
-		return "Worker [id=" + id + ", name=" + super.getName() + ", email=" + super.getEmail() + ", password="
-				+ super.getPassword() + ", appointment=" + super.getAppointments() + "job=" + job + "]";
+		String str = "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password
+				+ ", appointments={";
+		for (Appointment appointment : appointments) {
+			str += appointment.getId() + ",";
+		}
+		str += "}, job=" + job + "]";
+		return str;
 	}
 }
